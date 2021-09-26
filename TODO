@@ -1,2 +1,3 @@
 /*1) setters & getters for phys objects*/
 2) collision manager
+3) phys engine & objects manager
