@@ -1,11 +1,14 @@
 #include "tools.hpp"
 
 
-double Max(double a, double b) {
+double Max(const double a, const double b) {
   return a > b ? a : b;
 }
 
-
-double Max(double a, double b) {
+double Min(const double a, const double b) {
   return a < b ? a : b;
+}
+
+bool IsZero(const double a) {
+  return fabs(a) < EPSILON;
 }

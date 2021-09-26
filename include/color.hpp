@@ -2,6 +2,7 @@
 #define COLOR_HPP
 
 #include "SFML/Graphics.hpp"
+#include "tools.hpp"
 
 struct ColorRGB {
   double r = 0;
@@ -20,8 +21,6 @@ struct ColorRGB {
   friend ColorRGB operator * (const double scalar, const ColorRGB& color);
 };
 
-double Min(const double first, const double second);
-double Max(const double first, const double second);
 void Swap(double& first, double& second);
 
 #endif /* color.hpp */

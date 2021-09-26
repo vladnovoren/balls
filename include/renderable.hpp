@@ -6,16 +6,17 @@
 
 class Renderable {
 protected:
-  friend class Graphics;
   ColorRGB color;
 public:
-  Renderable();
-
   Renderable(const ColorRGB& color);
 
   void SetColor(const ColorRGB& color);
 
+  ColorGDB GetColor();
+
   virtual void Render(Graphics* graphics) = 0;
+
+  virtual ~Renderable() = 0;
 };
 
 
@@ -24,6 +25,9 @@ protected:
   Vector2f center;
   double radius;
 public:
+  RenderableBall(const Vector2f& center, const double radius,
+                 const ColorRGB& color);
+
   void Render(Graphics* graphics) override;
 };
 
@@ -33,15 +37,21 @@ protected:
   Vector2f center;
   double side_len;
 public:
+  RenderableSquare(const Vector2f& center, const double side_len,
+                   const ColorRGB& color);
+
   void Render(Graphics* graphics) override;
 };
 
 
-class RenderablePlane: public Renderable {
+class RenderableWall: public Renderable {
 protected:
   Vector2f edge1;
   Vector2f edge2;
 public:
+  RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
+                 const ColoRGB& color);
+
   void Render(Graphics* graphics) override;
 };
 

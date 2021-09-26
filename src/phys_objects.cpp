@@ -41,6 +41,11 @@ void PhysBall::SetMass(const double mass) {
 }
 
 
+void PhysBall::SetImpulse(const Vector2f& impulse) {
+  velocity = impulse / mass;
+}
+
+
 Vector2f PhysBall::GetCenter() const {
   return center;
 }
@@ -59,6 +64,24 @@ Vector2f PhysBall::GetVelocity() const {
 Vector2f PhysBall::GetImpulse() const {
   return mass * velocity;
 }
+
+
+Vector2f PhysBall::GetImpulseProj(const Vector2f& dir, Vector2f* parallel,
+                                                       Vector2f* normal) const {
+  assert(parallel);
+  assert(normal);
+
+  Vector2f impulse = GetImpulse();
+
+  Vector2f normal_dir = dir;
+  normal_dir.Normalize();
+
+  *parallel = normal_dir * (impulse * dir);
+  *normal = impulse - *parallel;
+
+  return impulse;
+}
+
 
 
 double PhysBall::GetMass() const {

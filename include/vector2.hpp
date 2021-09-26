@@ -38,6 +38,12 @@ public:
     return sqrt(x * x + y * y);
   }
 
+  Vector2<VectorType> GetProjection(const Vector2<VectorType>& direction) {
+    Vector2<VectorType> dir_normalized = direction;
+    dir_normalized.Normalize();
+    return dir_normalized * (*this * direction);
+  }
+
   void Normalize() {
     double length = Length();
     if (length) {

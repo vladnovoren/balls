@@ -41,12 +41,15 @@ public:
   void SetRadius(const double radius);
   void SetVelocity(const Vector2f& velocity);
   void SetMass(const double mass);
+  void SetImpulse(const Vector2f& impulse);
 
   Vector2f GetCenter() const;
   double GetRadius() const;
   Vector2f GetVelocity() const;
   double GetMass() const;
   Vector2f GetImpulse() const;
+  Vector2f GetImpulseProj(const Vector2f& dir, Vector2f* parallel,
+                                               Vector2f* normal) const;
 
   void Move(const double dt) override;
 };

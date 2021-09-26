@@ -52,7 +52,6 @@ void Graphics::RenderCircle(const Vector2f& center, const double radius) {
   circle.setRadius(radius);
   circle.setPosition(center.GetX(), center.GetY());
   circle.setFillColor(color);
-  sf::Vector2f pos = circle.getPosition();
   window.draw(circle);
 }
 

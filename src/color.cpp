@@ -62,13 +62,6 @@ ColorRGB operator * (const double scalar, const ColorRGB& color) {
   );
 }
 
-double Min(const double first, const double second) {
-  return first < second ? first : second;
-}
-
-double Max(const double first, const double second) {
-  return first > second ? first : second;
-}
 
 void Swap(double& first, double& second) {
   double temp = first;
