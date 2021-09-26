@@ -1,0 +1,136 @@
+#ifndef VECTOR2_HPP
+#define VECTOR2_HPP
+
+#include <cmath>
+#include <cassert>
+#include "SFML/Graphics.hpp"
+
+template<typename VectorType>
+class Vector2 {
+  friend class Graphics;
+  VectorType x = 0;
+  VectorType y = 0;
+public:
+  Vector2() {}
+
+  Vector2(VectorType x, VectorType y) {
+    this->x = x;
+    this->y = y;
+  }
+
+  void SetX(VectorType x) {
+    this->x = x;
+  }
+
+  void SetY(VectorType y) {
+    this->y = y;
+  }
+
+  VectorType GetX() const {
+    return x;
+  }
+
+  VectorType GetY() const {
+    return y;
+  }
+
+  double Length() const {
+    return sqrt(x * x + y * y);
+  }
+
+  void Normalize() {
+    double length = Length();
+    if (length) {
+      x /= length;
+      y /= length;
+    }
+  }
+
+  void Resize(double new_length) {
+    Normalize();
+    (*this) *= new_length;
+  }
+
+  void Reflect(const Vector2& normal) {
+    (*this) = 2 * (normal * *this) * normal - (*this);
+  }
+
+  Vector2& operator += (const Vector2& right) {
+    x += right.x;
+    y += right.y;
+    return *this;
+  }
+
+  Vector2& operator -= (const Vector2& right) {
+    x -= right.x;
+    y -= right.y;
+    return *this;
+  }
+
+  Vector2& operator *= (const double scalar) {
+    x *= scalar;
+    y *= scalar;
+    return *this;
+  }
+
+  Vector2 operator - () const {
+    return Vector2(-x, -y);
+  }
+
+  bool operator == (const Vector2& right) const {
+    return x == right.x && y == right.y;
+  }
+
+  Vector2 operator + (const Vector2& right) const {
+    return Vector2(
+      x + right.x,
+      y + right.y
+    );
+  }
+
+  Vector2 operator - (const Vector2& right) const {
+    return Vector2(
+      x - right.x,
+      y - right.y
+    );
+  }
+
+  Vector2 operator * (const double scalar) const {
+    return Vector2(
+      x * scalar,
+      y * scalar
+    );
+  }
+
+  double operator * (const Vector2& right) const {
+    return x * right.x +
+           y * right.y;
+  }
+};
+
+template<typename T>
+Vector2<T> operator * (const double scalar, const Vector2<T>& vector) {
+  Vector2<T> res = vector;
+  res *= scalar;
+  return res;
+}
+
+template<typename VectorType>
+double Vector2Cos(const Vector2<VectorType>& first, const Vector2<VectorType>& second) {
+  VectorType numerator = first * second;
+  if (!numerator)
+    return 0;
+  return numerator / (first.Length() * second.Length());
+}
+
+template<typename VectorType>
+double Vector2Sin(const Vector2<VectorType>& first, const Vector2<VectorType>& second) {
+  VectorType cos = Vector2Cos(first, second);
+  return sqrt(1 - cos * cos);
+}
+
+typedef Vector2<double> Vector2d;
+typedef Vector2<float> Vector2f;
+typedef Vector2<int> Vector2i;
+
+#endif /* vector2.hpp */
