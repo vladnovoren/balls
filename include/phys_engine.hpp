@@ -11,8 +11,6 @@ class PhysEngine {
   PhysBall creatures[MAX_N_CREATURES];
   size_t n_creatures;
 public:
-  void AddCreature(const PhysBall* creature);
-
   void ResponseAllForces();
 
   void ResponseForcesChargedBall(const PhysChargedBall& first, const PhysChargedBall& second);
@@ -21,3 +19,4 @@ public:
 };
 
 #endif /* phys_engine.hpp */
+

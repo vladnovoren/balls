@@ -6,6 +6,9 @@ PhysObject::PhysObject(const PhysType type) {
 }
 
 
+PhysObject::~PhysObject() {}
+
+
 PhysObject::PhysType PhysObject::GetType() const {
   return type;
 }
@@ -19,6 +22,9 @@ PhysBall::PhysBall(const Vector2f& center, const double radius,
   this->velocity = velocity;
   this->mass = mass;
 }
+
+
+PhysBall::~PhysBall() {}
 
 
 void PhysBall::SetCenter(const Vector2f& center) {
@@ -42,7 +48,18 @@ void PhysBall::SetMass(const double mass) {
 
 
 void PhysBall::SetImpulse(const Vector2f& impulse) {
-  velocity = impulse / mass;
+  velocity = impulse * (1.0 / mass);
+}
+
+
+void PhysBall::AddDeltaImpulse(const Vector2f& add) {
+  delta_impulse += add;
+}
+
+
+void PhysBall::UpdateImpulse() {
+  this->velocity += delta_impulse * (1.0 / mass);
+  delta_impulse = Vector2f(0, 0);
 }
 
 
@@ -64,24 +81,6 @@ Vector2f PhysBall::GetVelocity() const {
 Vector2f PhysBall::GetImpulse() const {
   return mass * velocity;
 }
-
-
-Vector2f PhysBall::GetImpulseProj(const Vector2f& dir, Vector2f* parallel,
-                                                       Vector2f* normal) const {
-  assert(parallel);
-  assert(normal);
-
-  Vector2f impulse = GetImpulse();
-
-  Vector2f normal_dir = dir;
-  normal_dir.Normalize();
-
-  *parallel = normal_dir * (impulse * dir);
-  *normal = impulse - *parallel;
-
-  return impulse;
-}
-
 
 
 double PhysBall::GetMass() const {
@@ -131,9 +130,32 @@ double PhysChargedBall::GetCharge() const {
 }
 
 
-PhysPlane::PhysPlane(const Vector2f& edge1, const Vector2f& edge2):
-           PhysObject(PhysType::PHYS_PLANE) {
+PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2):
+          PhysObject(PhysType::PHYS_WALL) {
   this->edge1 = edge1;
   this->edge2 = edge2;
+}
+
+
+PhysWall::~PhysWall() {}
+
+
+void PhysWall::SetEdge1(const Vector2f& edge1) {
+  this->edge1 = edge1;
+}
+
+
+void PhysWall::SetEdge2(const Vector2f& edge2) {
+  this->edge2 = edge2;
+}
+
+
+Vector2f PhysWall::GetEdge1() {
+  return edge1;
+}
+
+
+Vector2f PhysWall::GetEdge2() {
+  return edge2;
 }
 

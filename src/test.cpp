@@ -1,14 +1,14 @@
 #include <cstdio>
 
 
-class A {
-public:
-  virtual A() = 0;
+/*class A {*/
+/*public:*/
+  /*virtual A() = 0;*/
 
-  virtual void Print() = 0;
+  /*virtual void Print() = 0;*/
 
-  virtual ~A() = 0;
-};
+  /*virtual ~A() = 0;*/
+/*};*/
 
 
 //class B: virtual public A {

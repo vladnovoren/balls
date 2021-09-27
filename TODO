@@ -1,3 +1,4 @@
 collision manager
 phys engine & objects manager
-
+DISABLE VIRTUAL INHERITANCE
+place things like mass & velocity in base class PhysObject

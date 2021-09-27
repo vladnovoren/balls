@@ -8,15 +8,17 @@ class Renderable {
 protected:
   ColorRGB color;
 public:
+  Renderable();
+
+  virtual ~Renderable();
+
   Renderable(const ColorRGB& color);
 
   void SetColor(const ColorRGB& color);
 
-  ColorGDB GetColor();
+  ColorRGB GetColor();
 
   virtual void Render(Graphics* graphics) = 0;
-
-  virtual ~Renderable() = 0;
 };
 
 
@@ -50,11 +52,10 @@ protected:
   Vector2f edge2;
 public:
   RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
-                 const ColoRGB& color);
+                 const ColorRGB& color);
 
   void Render(Graphics* graphics) override;
 };
-
 
 
 #endif /* renderable.hpp */

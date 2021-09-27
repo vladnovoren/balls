@@ -1,7 +1,10 @@
 #include "renderable.hpp"
 
 
-Renderable::Renderable() {};
+Renderable::Renderable() {}
+
+
+Renderable::~Renderable() {}
 
 
 Renderable::Renderable(const ColorRGB& color) {
@@ -31,7 +34,7 @@ void RenderableBall::Render(Graphics* graphics) {
 
 
 RenderableSquare::RenderableSquare(const Vector2f& center, const double side_len,
-                                   const ColoRGB& color):
+                                   const ColorRGB& color):
                   Renderable(color) {
   this->center = center;
   this->side_len = side_len;
