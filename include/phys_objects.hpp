@@ -9,20 +9,35 @@ public:
   enum class PhysType {
     UNDEFINED = -1,
     PHYS_WALL,
-    PHYS_BALL,
-    PHYS_CHARGED_BALL
+    PHYS_BALL
   };
 
   PhysObject();
 
-  virtual ~PhysObject();
+  PhysObject(const double mass, const Vector2f& velocity,
+             const Vector2f& acceleration);
 
+  void SetMass(const double mass);
+  void SetVelocity(const Vector2f& velocity);
+  void SetAcceleration(const Vector2f& acceleration);
+  void SetImpulse(const Vector2f& impulse);
+  void AddDeltaImpulse(const Vector2f& delta_impulse);
+  void UpdateImpulse();
+
+  double GetMass() const;
+  Vector2f GetVelocity() const;
+  Vector2f GetAcceleration() const;
+  Vector2f GetImpulse() const;
   PhysType GetType() const;
 
   virtual void Move(const double dt) = 0;
 
   friend class PhysEngine;
 protected:
+  double mass;
+  Vector2f velocity;
+  Vector2f acceleration;
+  Vector2f delta_impulse;
   PhysType type;
 };
 
@@ -31,54 +46,25 @@ class PhysBall: public PhysObject {
 protected:
   Vector2f center;
   double radius;
-  Vector2f velocity;
-  double mass;
-  Vector2f delta_impulse;
+  double charge;
 public:
-  PhysBall(const Vector2f& center, const double radius,
-           const Vector2f& velocity, const double mass);
-
-  ~PhysBall() override;
+  PhysBall(const double mass, const Vector2f& velocity,
+           const Vector2f& acceleration, const Vector2f& center,
+           const double radius, const double charge);
 
   void SetCenter(const Vector2f& center);
   void SetRadius(const double radius);
-  void SetVelocity(const Vector2f& velocity);
-  void SetMass(const double mass);
-  void SetImpulse(const Vector2f& impulse);
-  void AddDeltaImpulse(const Vector2f& delta_impulse);
-  void UpdateImpulse();
+  void SetCharge(const double charge);
 
   Vector2f GetCenter() const;
   double GetRadius() const;
-  Vector2f GetVelocity() const;
-  double GetMass() const;
-  Vector2f GetImpulse() const;
-
-  void Move(const double dt) override;
-
-  friend class PhysEngine;
-};
-
-
-class PhysChargedBall: public PhysBall {
-protected:
-  Vector2f acceleration;
-  double charge;
-public:
-  PhysChargedBall(const Vector2f& center, const double radius,
-                  const Vector2f& velocity, const double mass,
-                  const double charge);
-
-  void SetAcceleration(const Vector2f& acceleration);
-  void SetCharge(const double charge);
-
-  Vector2f GetAcceleration() const;
   double GetCharge() const;
 
   void Move(const double dt) override;
 
   friend class PhysEngine;
 };
+
 
 
 class PhysWall: public PhysObject {
@@ -88,15 +74,13 @@ protected:
 public:
   PhysWall(const Vector2f& edge1, const Vector2f& edge2);
 
-  ~PhysWall() override;
-
   void SetEdge1(const Vector2f& edge1);
   void SetEdge2(const Vector2f& edge2);
 
-  void Move(const double) override {};
+  Vector2f GetEdge1() const;
+  Vector2f GetEdge2() const;
 
-  Vector2f GetEdge1();
-  Vector2f GetEdge2();
+  void Move(const double) override;
 
   friend class PhysEngine;
 };
