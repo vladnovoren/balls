@@ -13,7 +13,7 @@ public:
     PHYS_CHARGED_BALL
   };
 
-  PhysObject(const PhysType type);
+  PhysObject();
 
   virtual ~PhysObject();
 
@@ -81,7 +81,7 @@ public:
 };
 
 
-class PhysWall: public virtual PhysObject {
+class PhysWall: public PhysObject {
 protected:
   Vector2f edge1;
   Vector2f edge2;

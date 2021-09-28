@@ -1,8 +1,8 @@
 #include "phys_objects.hpp"
 
 
-PhysObject::PhysObject(const PhysType type) {
-  this->type = type;
+PhysObject::PhysObject() {
+  type = PhysType::UNDEFINED;
 }
 
 
@@ -130,10 +130,10 @@ double PhysChargedBall::GetCharge() const {
 }
 
 
-PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2):
-          PhysObject(PhysType::PHYS_WALL) {
+PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2) {
   this->edge1 = edge1;
   this->edge2 = edge2;
+  type = PhysType::PHYS_WALL;
 }
 
 

@@ -25,6 +25,7 @@ Renderable* CreaturesManager::GetRendComponent(const size_t creature_num) {
 }
 
 
-size_t CreatureManager::NumOfCreatures() {
+size_t CreaturesManager::NumOfCreatures() {
   return n_creatures;
 }
+
