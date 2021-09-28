@@ -15,12 +15,12 @@ PhysObject::PhysType PhysObject::GetType() const {
 
 
 PhysBall::PhysBall(const Vector2f& center, const double radius,
-                   const Vector2f& velocity, const double mass):
-                   PhysObject(PhysType::PHYS_BALL) {
+                   const Vector2f& velocity, const double mass) {
   this->center = center;
   this->radius = radius;
   this->velocity = velocity;
   this->mass = mass;
+  this->type = PhysType::PHYS_BALL;
 }
 
 
@@ -96,9 +96,9 @@ void PhysBall::Move(const double dt) {
 PhysChargedBall::PhysChargedBall(const Vector2f& center, const double radius,
                                  const Vector2f& velocity, const double mass,
                                  const double charge):
-                                 PhysObject(PhysType::PHYS_CHARGED_BALL),
-                                 PhysBall(center, radius, velocity, mass) {
+                 PhysBall(center, radius, velocity, mass) {
   this->charge = charge;
+  this->type = PhysType::PHYS_CHARGED_BALL;
 }
 
 

@@ -27,7 +27,7 @@ protected:
 };
 
 
-class PhysBall: public virtual PhysObject {
+class PhysBall: public PhysObject {
 protected:
   Vector2f center;
   double radius;
