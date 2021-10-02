@@ -10,7 +10,9 @@ const double COULOMBS_LAW_K = 9e9;
 class PhysEngine {
   CollisionManager collision_manager;
 public:
-  void UpdateAll(CreaturesContainer* creatures_container);
+  void MoveAll(const double dt, CreaturesContainer* creatures_container);
+
+  void Tick(const double dt, CreaturesContainer* creatures_container);
 };
 
 

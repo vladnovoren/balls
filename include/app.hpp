@@ -1,11 +1,17 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "phys_engine.hpp"
-#include "creatures.hpp"
+#include "creatures_manager.hpp"
 
 
-void Exec();
+class App {
+  Graphics graphics;
+  CreaturesManager creatures_manager;
+public:
+  App();
+
+  void Exec();
+};
 
 
 #endif /* app.hpp */
