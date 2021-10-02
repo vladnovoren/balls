@@ -2,31 +2,36 @@
 #define PHYS_OBJECTS_HPP
 
 #include "vector2.hpp"
+#include "component.hpp"
 
 
-class PhysObject {
+const size_t N_PHYS_OBJECTS = 3;
+
+class PhysObject: public Component {
 public:
+  Vector2f velocity;
+  Vector2f acceleration;
+
   enum class PhysType {
     UNDEFINED = -1,
-    PHYS_WALL,
-    PHYS_BALL
+    PHYS_BALL,
+    PHYS_CUBE,
+    PHYS_WALL
   };
 
-  PhysObject();
+  PhysObject(Molecule* owner);
 
   PhysObject(const double mass, const Vector2f& velocity,
-             const Vector2f& acceleration);
+             const Vector2f& acceleration, Molecule* owner);
+
+  ~PhysObject();
 
   void SetMass(const double mass);
-  void SetVelocity(const Vector2f& velocity);
-  void SetAcceleration(const Vector2f& acceleration);
   void SetImpulse(const Vector2f& impulse);
   void AddDeltaImpulse(const Vector2f& delta_impulse);
   void UpdateImpulse();
 
   double GetMass() const;
-  Vector2f GetVelocity() const;
-  Vector2f GetAcceleration() const;
   Vector2f GetImpulse() const;
   PhysType GetType() const;
 
@@ -35,30 +40,28 @@ public:
   friend class PhysEngine;
 protected:
   double mass;
-  Vector2f velocity;
-  Vector2f acceleration;
   Vector2f delta_impulse;
   PhysType type;
+  Molecule* owner;
 };
 
 
 class PhysBall: public PhysObject {
 protected:
-  Vector2f center;
   double radius;
-  double charge;
 public:
+  Vector2f center;
+  double charge;
+
   PhysBall(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double radius, const double charge);
+           const double radius, const double charge, Molecule* owner);
 
-  void SetCenter(const Vector2f& center);
+  ~PhysBall() override;
+
   void SetRadius(const double radius);
-  void SetCharge(const double charge);
 
-  Vector2f GetCenter() const;
   double GetRadius() const;
-  double GetCharge() const;
 
   void Move(const double dt) override;
 
@@ -66,19 +69,24 @@ public:
 };
 
 
+class PhysCube: public PhysBall {
+public:
+  PhysCube(const double mass, const Vector2f& velocity,
+           const Vector2f& acceleration, const Vector2f& center,
+           const double radius, const double charge, Molecule* owner);
+
+  ~PhysCube() override;
+};
+
 
 class PhysWall: public PhysObject {
-protected:
+public:
   Vector2f edge1;
   Vector2f edge2;
-public:
-  PhysWall(const Vector2f& edge1, const Vector2f& edge2);
 
-  void SetEdge1(const Vector2f& edge1);
-  void SetEdge2(const Vector2f& edge2);
+  PhysWall(const Vector2f& edge1, const Vector2f& edge2, Molecule* owner);
 
-  Vector2f GetEdge1() const;
-  Vector2f GetEdge2() const;
+  ~PhysWall() override;
 
   void Move(const double) override;
 

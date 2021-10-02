@@ -9,16 +9,11 @@
 static const double CIRCLE_N_POINTS = 27;
 
 class Graphics {
-  double ppu;
   sf::RenderWindow window;
   sf::Color color;
 public:
-  Graphics(const Vector2f& size, const char* title, const double ppu);
+  Graphics(const Vector2f& size, const char* title);
   ~Graphics();
-
-  Vector2f RealToPixelVector(const Vector2f& vector);
-  Vector2f RealToPixelPoint(const Vector2f& point);
-  double RealToPixelLen(const double len);
 
   bool ShouldClose();
   void Clear(const ColorRGB& color);

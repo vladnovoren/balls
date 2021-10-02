@@ -3,29 +3,24 @@
 
 // PhysObject
 //------------------------------------------------------------------------------
-PhysObject::PhysObject(): mass(0.0) {
+PhysObject::PhysObject(Molecule* owner): Component(owner) {
 }
 
 
 PhysObject::PhysObject(const double mass, const Vector2f& velocity,
-                       const Vector2f& acceleration):
-            mass(mass), velocity(velocity), acceleration(acceleration),
+                       const Vector2f& acceleration, Molecule* owner):
+            Component(owner),
+            velocity(velocity), acceleration(acceleration), mass(mass),
             type(PhysType::UNDEFINED) {
+}
+
+
+PhysObject::~PhysObject() {
 }
 
 
 void PhysObject::SetMass(const double mass) {
   this->mass = mass;
-}
-
-
-void PhysObject::SetVelocity(const Vector2f& velocity) {
-  this->velocity = velocity;
-}
-
-
-void PhysObject::SetAcceleration(const Vector2f& acceleration) {
-  this->acceleration = acceleration;
 }
 
 
@@ -50,16 +45,6 @@ double PhysObject::GetMass() const {
 }
 
 
-Vector2f PhysObject::GetVelocity() const {
-  return velocity;
-}
-
-
-Vector2f PhysObject::GetAcceleration() const {
-  return acceleration;
-}
-
-
 Vector2f PhysObject::GetImpulse() const {
   return mass * velocity;
 }
@@ -75,16 +60,14 @@ PhysObject::PhysType PhysObject::GetType() const {
 //------------------------------------------------------------------------------
 PhysBall::PhysBall(const double mass, const Vector2f& velocity,
                    const Vector2f& acceleration, const Vector2f& center,
-                   const double radius, const double charge):
-          PhysObject(mass, velocity, acceleration),
-          center(center), radius(radius), charge(charge) {
+                   const double radius, const double charge, Molecule* owner):
+          PhysObject(mass, velocity, acceleration, owner),
+          radius(radius), center(center), charge(charge) {
   this->type = PhysType::PHYS_BALL;
 }
 
 
-void PhysBall::SetCenter(const Vector2f& center) {
-  this->center = center;
-}
+PhysBall::~PhysBall() {}
 
 
 void PhysBall::SetRadius(const double radius) {
@@ -92,23 +75,8 @@ void PhysBall::SetRadius(const double radius) {
 }
 
 
-void PhysBall::SetCharge(const double charge) {
-  this->charge = charge;
-}
-
-
-Vector2f PhysBall::GetCenter() const {
-  return center;
-}
-
-
 double PhysBall::GetRadius() const {
   return radius;
-}
-
-
-double PhysBall::GetCharge() const {
-  return charge;
 }
 
 
@@ -121,30 +89,29 @@ void PhysBall::Move(const double dt) {
 //------------------------------------------------------------------------------
 
 
+// PhysCube
+//------------------------------------------------------------------------------
+PhysCube::PhysCube(const double mass, const Vector2f& velocity,
+                   const Vector2f& acceleration, const Vector2f& center,
+                   const double radius, const double charge, Molecule* owner):
+          PhysBall(mass, velocity, acceleration, center, radius, charge, owner) {
+  type = PhysType::PHYS_CUBE;
+}
+
+
+PhysCube::~PhysCube() {
+}
+//------------------------------------------------------------------------------
+
+
 // PhysWall
 //------------------------------------------------------------------------------
-PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2):
-          edge1(edge1), edge2(edge2) {
+PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2, Molecule* owner):
+          PhysObject(owner), edge1(edge1), edge2(edge2) {
 }
 
 
-void PhysWall::SetEdge1(const Vector2f& edge1) {
-  this->edge1 = edge1;
-}
-
-
-void PhysWall::SetEdge2(const Vector2f& edge2) {
-  this->edge2 = edge2;
-}
-
-
-Vector2f PhysWall::GetEdge1() const {
-  return edge1;
-}
-
-
-Vector2f PhysWall::GetEdge2() const {
-  return edge2;
+PhysWall::~PhysWall() {
 }
 
 

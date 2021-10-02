@@ -2,23 +2,23 @@
 #define RENDERABLE_HPP
 
 #include "graphics.hpp"
+#include "component.hpp"
+#include "coord_sys.hpp"
 
 
-class Renderable {
+class Renderable: public Component {
 protected:
   ColorRGB color;
 public:
-  Renderable();
+  Renderable(const ColorRGB& color, Molecule* owner);
 
-  virtual ~Renderable();
-
-  Renderable(const ColorRGB& color);
+  ~Renderable() override;
 
   void SetColor(const ColorRGB& color);
 
   ColorRGB GetColor();
 
-  virtual void Render(Graphics* graphics) = 0;
+  virtual void Render(Graphics* graphics, const CoordSys& coord_sys) = 0;
 };
 
 
@@ -28,9 +28,11 @@ protected:
   double radius;
 public:
   RenderableBall(const Vector2f& center, const double radius,
-                 const ColorRGB& color);
+                 const ColorRGB& color, Molecule* owner);
+  
+  ~RenderableBall() override;
 
-  void Render(Graphics* graphics) override;
+  void Render(Graphics* graphics, const CoordSys& coord_sys) override;
 };
 
 
@@ -40,9 +42,11 @@ protected:
   double side_len;
 public:
   RenderableSquare(const Vector2f& center, const double side_len,
-                   const ColorRGB& color);
+                   const ColorRGB& color, Molecule* owner);
 
-  void Render(Graphics* graphics) override;
+  ~RenderableSquare() override;
+
+  void Render(Graphics* graphics, const CoordSys& coord_sys) override;
 };
 
 
@@ -52,9 +56,11 @@ protected:
   Vector2f edge2;
 public:
   RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
-                 const ColorRGB& color);
+                 const ColorRGB& color, Molecule* owner);
 
-  void Render(Graphics* graphics) override;
+  ~RenderableWall() override;
+
+  void Render(Graphics* graphics, const CoordSys& coord_sys) override;
 };
 
 

@@ -10,7 +10,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(balls src/test.cpp src/graphics.cpp src/color.cpp src/tools.cpp
                src/phys_objects.cpp src/renderable.cpp src/collisions.cpp
-               src/creatures.cpp src/creatures_manager.cpp)
+               src/molecules.cpp src/molecules_manager.cpp src/component.cpp
+               src/coord_sys.cpp src/phys_engine.cpp)
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 

@@ -3,35 +3,20 @@
 
 #include <cmath>
 #include <cassert>
+#include "tools.hpp"
 #include "SFML/Graphics.hpp"
 
 template<typename VectorType>
 class Vector2 {
+public:
   friend class Graphics;
   VectorType x = 0;
   VectorType y = 0;
-public:
   Vector2() {}
 
   Vector2(VectorType x, VectorType y) {
     this->x = x;
     this->y = y;
-  }
-
-  void SetX(VectorType x) {
-    this->x = x;
-  }
-
-  void SetY(VectorType y) {
-    this->y = y;
-  }
-
-  VectorType GetX() const {
-    return x;
-  }
-
-  VectorType GetY() const {
-    return y;
   }
 
   double Length() const {
@@ -41,7 +26,7 @@ public:
   Vector2<VectorType> GetProjection(const Vector2<VectorType>& direction) {
     Vector2<VectorType> dir_normalized = direction;
     dir_normalized.Normalize();
-    return dir_normalized * (*this * direction);
+    return dir_normalized * (*this * dir_normalized);
   }
 
   void Normalize() {

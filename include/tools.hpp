@@ -11,6 +11,8 @@ double Max(const double a, const double b);
 
 double Min(const double a, const double b);
 
+double Sign(const double x);
+
 bool IsZero(const double a);
 
 

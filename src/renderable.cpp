@@ -1,15 +1,13 @@
 #include "renderable.hpp"
 
 
-Renderable::Renderable() {}
+// Renderable
+//==============================================================================
+Renderable::Renderable(const ColorRGB& color, Molecule* owner):
+            Component(owner), color(color) {}
 
 
 Renderable::~Renderable() {}
-
-
-Renderable::Renderable(const ColorRGB& color) {
-  this->color = color;
-}
 
 
 void Renderable::SetColor(const ColorRGB& color) {
@@ -17,50 +15,74 @@ void Renderable::SetColor(const ColorRGB& color) {
 }
 
 
+ColorRGB Renderable::GetColor() {
+  return color;
+}
+//==============================================================================
+
+
+// RenderableBall
+//==============================================================================
 RenderableBall::RenderableBall(const Vector2f& center, const double radius,
-                               const ColorRGB& color):
-                Renderable(color) {
+                               const ColorRGB& color, Molecule* owner):
+                Renderable(color, owner) {
   this->center = center;
   this->radius = radius;
 }
 
 
-void RenderableBall::Render(Graphics* graphics) {
+RenderableBall::~RenderableBall() {}
+
+
+void RenderableBall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderCircle(graphics->RealToPixelVector(center),
-                         graphics->RealToPixelLen(radius));
+  graphics->RenderCircle(coord_sys.RealToPixelVector(center),
+                         coord_sys.RealToPixelLen(radius));
 }
+//==============================================================================
 
 
+// RenderableSquare
+//==============================================================================
 RenderableSquare::RenderableSquare(const Vector2f& center, const double side_len,
-                                   const ColorRGB& color):
-                  Renderable(color) {
+                                   const ColorRGB& color, Molecule* owner):
+                  Renderable(color, owner) {
   this->center = center;
   this->side_len = side_len;
 }
 
 
-void RenderableSquare::Render(Graphics* graphics) {
+RenderableSquare::~RenderableSquare() {}
+
+
+void RenderableSquare::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderSquare(graphics->RealToPixelVector(center - Vector2f(
+  graphics->RenderSquare(coord_sys.RealToPixelVector(center - Vector2f(
                                    side_len / 2, side_len / 2)),
-                         graphics->RealToPixelLen(side_len));
+                         coord_sys.RealToPixelLen(side_len));
 }
+//==============================================================================
 
 
+// RenderableWall
+//==============================================================================
 RenderableWall::RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
-                               const ColorRGB& color):
-                Renderable(color) {
+                               const ColorRGB& color, Molecule* owner):
+                Renderable(color, owner) {
   this->edge1 = edge1;
   this->edge2 = edge2;
 }
 
 
-void RenderableWall::Render(Graphics* graphics) {
+RenderableWall::~RenderableWall() {}
+
+
+void RenderableWall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderLine(graphics->RealToPixelVector(edge1),
-                       graphics->RealToPixelVector(edge2));
+  graphics->RenderLine(coord_sys.RealToPixelVector(edge1),
+                       coord_sys.RealToPixelVector(edge2));
 }
+//==============================================================================

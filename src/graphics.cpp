@@ -1,9 +1,8 @@
 #include "graphics.hpp"
 
-Graphics::Graphics(const Vector2f& size, const char* title, const double ppu) {
+Graphics::Graphics(const Vector2f& size, const char* title) {
   window.create(sf::VideoMode(size.x, size.y), title);
   window.setVerticalSyncEnabled(true);
-  this->ppu = ppu;
 }
 
 Graphics::~Graphics() {
@@ -50,7 +49,7 @@ void Graphics::RenderCircle(const Vector2f& center, const double radius) {
   sf::CircleShape circle;
   circle.setOrigin(sf::Vector2f(radius, radius));
   circle.setRadius(radius);
-  circle.setPosition(center.GetX(), center.GetY());
+  circle.setPosition(center.x, center.y);
   circle.setFillColor(color);
   window.draw(circle);
 }
@@ -61,22 +60,4 @@ sf::Vector2f Graphics::ToSFMLVector(const Vector2f& vector) {
 
 sf::Color Graphics::ToSFMLColor(const ColorRGB& color) {
   return sf::Color(color.r * 255, color.g * 255, color.b * 255, 255);
-}
-
-Vector2f Graphics::RealToPixelVector(const Vector2f& vector) {
-  return Vector2f(
-    vector.x * ppu,
-    -vector.y * ppu
-  );
-}
-
-Vector2f Graphics::RealToPixelPoint(const Vector2f& vector) {
-  return Vector2f(
-    vector.x * ppu,
-    -vector.y * ppu + window.getSize().y
-  );
-}
-
-double Graphics::RealToPixelLen(const double len) {
-  return len * ppu;
 }
