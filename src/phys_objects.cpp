@@ -3,12 +3,12 @@
 
 // PhysObject
 //------------------------------------------------------------------------------
-PhysObject::PhysObject(Molecule* owner): Component(owner) {
+PhysObject::PhysObject(Creature* owner): Component(owner) {
 }
 
 
 PhysObject::PhysObject(const double mass, const Vector2f& velocity,
-                       const Vector2f& acceleration, Molecule* owner):
+                       const Vector2f& acceleration, Creature* owner):
             Component(owner),
             velocity(velocity), acceleration(acceleration), mass(mass),
             type(PhysType::UNDEFINED) {
@@ -60,7 +60,7 @@ PhysObject::PhysType PhysObject::GetType() const {
 //------------------------------------------------------------------------------
 PhysBall::PhysBall(const double mass, const Vector2f& velocity,
                    const Vector2f& acceleration, const Vector2f& center,
-                   const double radius, const double charge, Molecule* owner):
+                   const double radius, const double charge, Creature* owner):
           PhysObject(mass, velocity, acceleration, owner),
           radius(radius), center(center), charge(charge) {
   this->type = PhysType::PHYS_BALL;
@@ -93,7 +93,7 @@ void PhysBall::Move(const double dt) {
 //------------------------------------------------------------------------------
 PhysCube::PhysCube(const double mass, const Vector2f& velocity,
                    const Vector2f& acceleration, const Vector2f& center,
-                   const double radius, const double charge, Molecule* owner):
+                   const double radius, const double charge, Creature* owner):
           PhysBall(mass, velocity, acceleration, center, radius, charge, owner) {
   type = PhysType::PHYS_CUBE;
 }
@@ -106,7 +106,7 @@ PhysCube::~PhysCube() {
 
 // PhysWall
 //------------------------------------------------------------------------------
-PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2, Molecule* owner):
+PhysWall::PhysWall(const Vector2f& edge1, const Vector2f& edge2, Creature* owner):
           PhysObject(owner), edge1(edge1), edge2(edge2) {
 }
 

@@ -1,12 +1,12 @@
 #include "component.hpp"
 
 
-Component::Component(Molecule* owner): owner(owner) {}
+Component::Component(Creature* owner): owner(owner) {}
 
 
 Component::~Component() {}
 
 
-Molecule* Component::GetOwner() {
+Creature* Component::GetOwner() {
   return owner;
 }

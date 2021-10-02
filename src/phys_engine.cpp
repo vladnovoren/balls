@@ -1,8 +1,8 @@
 #include "phys_engine.hpp"
 
 
-void PhysEngine::UpdateAll(MoleculesManager* molecules_manager) {
-  assert(molecules_manager);
+void PhysEngine::UpdateAll(CreaturesContainer* creatures_container) {
+  assert(creatures_container);
 
-  collision_manager.CollideAll(molecules_manager);
+  collision_manager.CollideAll(creatures_container);
 }

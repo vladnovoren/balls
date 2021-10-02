@@ -1,17 +1,17 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
-class Molecule;
+class Creature;
 
 class Component {
 protected:
-  Molecule* owner;
+  Creature* owner;
 public:
-  Component(Molecule* owner);
+  Component(Creature* owner);
 
   virtual ~Component() = 0;
 
-  Molecule* GetOwner();
+  Creature* GetOwner();
 };
 
 

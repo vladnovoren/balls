@@ -2,17 +2,15 @@
 #define PHYS_ENGINE
 
 #include "collisions.hpp"
-#include <cassert>
+#include "creatures_container.hpp"
 
 const double COULOMBS_LAW_K = 9e9;
 
 
-class MoleculesManager;
-
 class PhysEngine {
   CollisionManager collision_manager;
 public:
-  void UpdateAll(MoleculesManager* molecules_manager);
+  void UpdateAll(CreaturesContainer* creatures_container);
 };
 
 

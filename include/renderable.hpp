@@ -10,7 +10,7 @@ class Renderable: public Component {
 protected:
   ColorRGB color;
 public:
-  Renderable(const ColorRGB& color, Molecule* owner);
+  Renderable(const ColorRGB& color, Creature* owner);
 
   ~Renderable() override;
 
@@ -28,7 +28,7 @@ protected:
   double radius;
 public:
   RenderableBall(const Vector2f& center, const double radius,
-                 const ColorRGB& color, Molecule* owner);
+                 const ColorRGB& color, Creature* owner);
   
   ~RenderableBall() override;
 
@@ -42,7 +42,7 @@ protected:
   double side_len;
 public:
   RenderableSquare(const Vector2f& center, const double side_len,
-                   const ColorRGB& color, Molecule* owner);
+                   const ColorRGB& color, Creature* owner);
 
   ~RenderableSquare() override;
 
@@ -56,7 +56,7 @@ protected:
   Vector2f edge2;
 public:
   RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
-                 const ColorRGB& color, Molecule* owner);
+                 const ColorRGB& color, Creature* owner);
 
   ~RenderableWall() override;
 

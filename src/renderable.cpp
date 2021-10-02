@@ -3,7 +3,7 @@
 
 // Renderable
 //==============================================================================
-Renderable::Renderable(const ColorRGB& color, Molecule* owner):
+Renderable::Renderable(const ColorRGB& color, Creature* owner):
             Component(owner), color(color) {}
 
 
@@ -24,7 +24,7 @@ ColorRGB Renderable::GetColor() {
 // RenderableBall
 //==============================================================================
 RenderableBall::RenderableBall(const Vector2f& center, const double radius,
-                               const ColorRGB& color, Molecule* owner):
+                               const ColorRGB& color, Creature* owner):
                 Renderable(color, owner) {
   this->center = center;
   this->radius = radius;
@@ -46,7 +46,7 @@ void RenderableBall::Render(Graphics* graphics, const CoordSys& coord_sys) {
 // RenderableSquare
 //==============================================================================
 RenderableSquare::RenderableSquare(const Vector2f& center, const double side_len,
-                                   const ColorRGB& color, Molecule* owner):
+                                   const ColorRGB& color, Creature* owner):
                   Renderable(color, owner) {
   this->center = center;
   this->side_len = side_len;
@@ -69,7 +69,7 @@ void RenderableSquare::Render(Graphics* graphics, const CoordSys& coord_sys) {
 // RenderableWall
 //==============================================================================
 RenderableWall::RenderableWall(const Vector2f& edge1, const Vector2f& edge2,
-                               const ColorRGB& color, Molecule* owner):
+                               const ColorRGB& color, Creature* owner):
                 Renderable(color, owner) {
   this->edge1 = edge1;
   this->edge2 = edge2;

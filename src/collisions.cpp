@@ -14,14 +14,14 @@ CollisionManager::CollisionManager() {
 }
 
 
-void CollisionManager::CollideAll(MoleculesManager* molecules_manager) {
-  assert(molecules_manager);
+void CollisionManager::CollideAll(CreaturesContainer* creatures_container) {
+  assert(creatures_container);
 
-  for (size_t i = 0; i < molecules_manager->NumOfMolecules(); ++i) {
-    PhysObject* phys_obj1 = molecules_manager->GetPhysComponent(i);
+  for (size_t i = 0; i < creatures_container->NumOfCreatures(); ++i) {
+    PhysObject* phys_obj1 = creatures_container->GetPhysComponent(i);
     int id1 = int(phys_obj1->GetType());
-    for (size_t j = i; j < molecules_manager->NumOfMolecules(); ++j) {
-      PhysObject* phys_obj2 = molecules_manager->GetPhysComponent(j);
+    for (size_t j = i; j < creatures_container->NumOfCreatures(); ++j) {
+      PhysObject* phys_obj2 = creatures_container->GetPhysComponent(j);
       int id2 = int(phys_obj2->GetType());
       if (id1 > id2) {
         std::swap(phys_obj1, phys_obj2);

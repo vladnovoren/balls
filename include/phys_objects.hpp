@@ -19,10 +19,10 @@ public:
     PHYS_WALL
   };
 
-  PhysObject(Molecule* owner);
+  PhysObject(Creature* owner);
 
   PhysObject(const double mass, const Vector2f& velocity,
-             const Vector2f& acceleration, Molecule* owner);
+             const Vector2f& acceleration, Creature* owner);
 
   ~PhysObject();
 
@@ -42,7 +42,7 @@ protected:
   double mass;
   Vector2f delta_impulse;
   PhysType type;
-  Molecule* owner;
+  Creature* owner;
 };
 
 
@@ -55,7 +55,7 @@ public:
 
   PhysBall(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double radius, const double charge, Molecule* owner);
+           const double radius, const double charge, Creature* owner);
 
   ~PhysBall() override;
 
@@ -73,7 +73,7 @@ class PhysCube: public PhysBall {
 public:
   PhysCube(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double radius, const double charge, Molecule* owner);
+           const double radius, const double charge, Creature* owner);
 
   ~PhysCube() override;
 };
@@ -84,7 +84,7 @@ public:
   Vector2f edge1;
   Vector2f edge2;
 
-  PhysWall(const Vector2f& edge1, const Vector2f& edge2, Molecule* owner);
+  PhysWall(const Vector2f& edge1, const Vector2f& edge2, Creature* owner);
 
   ~PhysWall() override;
 

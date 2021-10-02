@@ -1,9 +1,7 @@
 #ifndef COLLISIONS_HPP
 #define COLLISIONS_HPP
 
-#include "phys_objects.hpp"
-#include "molecules_manager.hpp"
-#include "tools.hpp"
+#include "creatures_container.hpp"
 
 
 
@@ -11,7 +9,7 @@ class CollisionManager {
 public:
   CollisionManager();
 
-  void CollideAll(MoleculesManager* molecules_manager);
+  void CollideAll(CreaturesContainer* creatures_container);
 
   void Collide(PhysObject* first, PhysObject* second);
 
