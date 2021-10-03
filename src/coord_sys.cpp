@@ -1,6 +1,21 @@
 #include "coord_sys.hpp"
 
 
+Ranges::Ranges() {};
+
+
+Ranges::Ranges(const Vector2f& max, const Vector2f& min):
+        max(max), min(min) {
+}
+
+
+CoordSys::CoordSys(const Vector2f& p_center, const Ranges& ranges,
+                   const double ppu):
+          p_center(p_center), ranges(ranges), ppu(ppu) {
+  p_ranges = Ranges();
+}
+
+
 double CoordSys::RealToPixelLen(const double len) const {
   return len * ppu;
 }

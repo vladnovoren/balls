@@ -3,7 +3,7 @@
 
 #include "creatures.hpp"
 
-const size_t MAX_N_CREATURES = 100;
+const size_t MAX_N_CREATURES = 1000;
 
 
 class CreaturesContainer {
@@ -12,6 +12,8 @@ class CreaturesContainer {
   Renderable* rend_components[MAX_N_CREATURES];
   size_t n_creatures;
 public:
+  CreaturesContainer();
+
   ~CreaturesContainer();
 
   bool AddCreature(Creature* creature);
@@ -19,6 +21,8 @@ public:
   PhysObject* GetPhysComponent(const size_t creature_num);
 
   Renderable* GetRendComponent(const size_t creature_num);
+
+  Creature* GetCreature(const size_t creature_num);
 
   size_t NumOfCreatures();
 };

@@ -34,11 +34,22 @@ RenderableBall::RenderableBall(const Vector2f& center, const double radius,
 RenderableBall::~RenderableBall() {}
 
 
+void RenderableBall::SetRadius(const double radius) {
+  this->radius = radius;
+}
+
+
+double RenderableBall::GetRadius() const {
+  return radius;
+}
+
+
 void RenderableBall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderCircle(coord_sys.RealToPixelVector(center),
-                         coord_sys.RealToPixelLen(radius));
+  graphics->RenderCircle(coord_sys.RealToPixelPoint(center),
+                         coord_sys.RealToPixelLen(radius),
+                         color);
 }
 //==============================================================================
 
@@ -56,12 +67,23 @@ RenderableSquare::RenderableSquare(const Vector2f& center, const double side_len
 RenderableSquare::~RenderableSquare() {}
 
 
+void RenderableSquare::SetSideLen(const double side_len) {
+  this->side_len = side_len;
+}
+
+
+double RenderableSquare::GetSideLen() const {
+  return side_len;
+}
+
+
 void RenderableSquare::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderSquare(coord_sys.RealToPixelVector(center - Vector2f(
-                                   side_len / 2, side_len / 2)),
-                         coord_sys.RealToPixelLen(side_len));
+  graphics->RenderSquare(coord_sys.RealToPixelPoint(center - Vector2f(side_len / 2,
+                                                                      -side_len / 2)),
+                         coord_sys.RealToPixelLen(side_len),
+                         color);
 }
 //==============================================================================
 
@@ -82,7 +104,8 @@ RenderableWall::~RenderableWall() {}
 void RenderableWall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderLine(coord_sys.RealToPixelVector(edge1),
-                       coord_sys.RealToPixelVector(edge2));
+  graphics->RenderLine(coord_sys.RealToPixelPoint(edge1),
+                       coord_sys.RealToPixelPoint(edge2),
+                       color);
 }
 //==============================================================================

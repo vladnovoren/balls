@@ -11,6 +11,7 @@ static const double CIRCLE_N_POINTS = 27;
 class Graphics {
   sf::RenderWindow window;
   sf::Color color;
+  sf::Clock clock;
 public:
   Graphics(const Vector2f& size, const char* title);
   ~Graphics();
@@ -21,9 +22,14 @@ public:
 
   void SetColor(const ColorRGB& color);
 
-  void RenderLine(const Vector2f& start, const Vector2f& end);
-  void RenderSquare(const Vector2f& position, const double side_len);
-  void RenderCircle(const Vector2f& center, const double radius);
+  void RenderLine(const Vector2f& start, const Vector2f& end,
+                  const ColorRGB& color);
+  void RenderSquare(const Vector2f& position, const double side_len,
+                    const ColorRGB& color);
+  void RenderCircle(const Vector2f& center, const double radius,
+                    const ColorRGB& color);
+
+  double ResetTime();
 
   sf::Vector2f ToSFMLVector(const Vector2f& vector);
   sf::Color ToSFMLColor(const ColorRGB& color);

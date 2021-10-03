@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-const double EPSILON = 1e-9;
+const double EPSILON = 1e-2;
 
 
 double Max(const double a, const double b);

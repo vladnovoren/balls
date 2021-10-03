@@ -7,6 +7,10 @@
 struct Ranges {
   Vector2f max;
   Vector2f min;
+
+  Ranges();
+
+  Ranges(const Vector2f& max, const Vector2f& min);
 };
 
 struct CoordSys {
@@ -14,6 +18,8 @@ struct CoordSys {
   Ranges ranges;
   Ranges p_ranges;
   double ppu;
+
+  CoordSys(const Vector2f& p_center, const Ranges& ranges, const double ppu);
 
   double RealToPixelLen(const double len) const;
   Vector2f RealToPixelVector(const Vector2f& vector) const;

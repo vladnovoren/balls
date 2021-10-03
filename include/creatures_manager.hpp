@@ -10,9 +10,11 @@ class CreaturesManager {
 public:
   CreaturesContainer creatures_container;
 
-  CreaturesManager();
+  CreaturesManager(const CoordSys& coord_sys);
 
-  void RenderAll(Graphics* graphics);
+  void SyncRendWithPhys();
+
+  void Render(Graphics* graphics);
 
   void Tick(const double dt, Graphics* graphics);
 };

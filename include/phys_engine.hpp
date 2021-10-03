@@ -3,14 +3,14 @@
 
 #include "collisions.hpp"
 #include "creatures_container.hpp"
-
-const double COULOMBS_LAW_K = 9e9;
+#include "forces_manager.hpp"
 
 
 class PhysEngine {
   CollisionManager collision_manager;
+  ForcesManager forces_manager;
 public:
-  void MoveAll(const double dt, CreaturesContainer* creatures_container);
+  void Move(const double dt, CreaturesContainer* creatures_container);
 
   void Tick(const double dt, CreaturesContainer* creatures_container);
 };

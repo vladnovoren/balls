@@ -97,6 +97,10 @@ public:
     return x * right.x +
            y * right.y;
   }
+
+  void Print() const {
+    printf("x: %lf, y: %lf\n", x, y);
+  }
 };
 
 template<typename T>

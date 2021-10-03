@@ -1,6 +1,7 @@
 #include "creatures.hpp"
 
-
+// Creature
+//==============================================================================
 Creature::Creature(PhysObject* phys_component,
                    Renderable* rend_component):
           phys_component(phys_component),
@@ -22,8 +23,11 @@ PhysObject* Creature::GetPhysComponent() const {
 Renderable* Creature::GetRendComponent() const {
   return rend_component;
 }
+//==============================================================================
 
 
+// Ball
+//==============================================================================
 Ball::Ball(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
            const double radius, const double charge, const ColorRGB& color):
@@ -33,16 +37,55 @@ Ball::Ball(const double mass, const Vector2f& velocity,
 }
 
 
+Ball::~Ball() {}
+
+
+void Ball::SyncRendWithPhys() {
+  PhysBall* phys = reinterpret_cast<PhysBall*>(phys_component);
+  RenderableBall* rend = reinterpret_cast<RenderableBall*>(rend_component);
+  rend->center = phys->center;
+}
+//==============================================================================
+
+
+// Cube
+//==============================================================================
 Cube::Cube(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
            const double side_len, const double charge, const ColorRGB& color):
-      Creature(new PhysCube(mass, velocity, acceleration, center, side_len / 2,
+      Creature(new PhysCube(mass, velocity, acceleration, center, side_len,
                             charge, this),
-               new RenderableSquare(center, side_len / 2, color, this)) {
+               new RenderableSquare(center, side_len, color, this)) {
 }
 
 
-Wall::Wall(const Vector2f& edge1, const Vector2f& edge2, const ColorRGB& color):
-      Creature(new PhysWall(edge1, edge2, this),
+Cube::~Cube() {}
+
+
+void Cube::SyncRendWithPhys() {
+  PhysCube* phys = reinterpret_cast<PhysCube*>(phys_component);
+  RenderableSquare* rend = reinterpret_cast<RenderableSquare*>(rend_component);
+  rend->center = phys->center;
+}
+//==============================================================================
+
+
+// Wall
+//==============================================================================
+Wall::Wall(const Vector2f& edge1, const Vector2f& edge2, const ColorRGB& color,
+           const PhysWall::WallType wall_type):
+      Creature(new PhysWall(edge1, edge2, this, wall_type),
                new RenderableWall(edge1, edge2, color, this)) {
 }
+
+
+Wall::~Wall() {}
+
+
+void Wall::SyncRendWithPhys() {
+  PhysWall* phys = reinterpret_cast<PhysWall*>(phys_component);
+  RenderableWall* rend = reinterpret_cast<RenderableWall*>(rend_component);
+  rend->edge1 = phys->edge1;
+  rend->edge2 = phys->edge2;
+}
+//==============================================================================

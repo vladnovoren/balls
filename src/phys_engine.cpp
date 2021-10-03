@@ -1,11 +1,11 @@
 #include "phys_engine.hpp"
 
 
-void PhysEngine::MoveAll(const double dt, CreaturesContainer* creaturs_container) {
-  assert(creaturs_container);
+void PhysEngine::Move(const double dt, CreaturesContainer* creatures_container) {
+  assert(creatures_container);
 
-  for (size_t i = 0; i < creaturs_container->NumOfCreatures(); ++i) {
-    creaturs_container->GetPhysComponent(i)->Move(dt);
+  for (size_t i = 0; i < creatures_container->NumOfCreatures(); ++i) {
+    creatures_container->GetPhysComponent(i)->Move(dt);
   }
 }
 
@@ -13,6 +13,7 @@ void PhysEngine::MoveAll(const double dt, CreaturesContainer* creaturs_container
 void PhysEngine::Tick(const double dt, CreaturesContainer* creatures_container) {
   assert(creatures_container);
 
+  Move(dt, creatures_container);
   collision_manager.CollideAll(creatures_container);
-  MoveAll(dt, creatures_container);
+  forces_manager.ResponseAll(creatures_container);
 }

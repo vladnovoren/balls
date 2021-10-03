@@ -40,7 +40,6 @@ public:
   friend class PhysEngine;
 protected:
   double mass;
-  Vector2f delta_impulse;
   PhysType type;
   Creature* owner;
 };
@@ -65,6 +64,8 @@ public:
 
   void Move(const double dt) override;
 
+  void AddForce(const Vector2f& force);
+
   friend class PhysEngine;
 };
 
@@ -73,7 +74,7 @@ class PhysCube: public PhysBall {
 public:
   PhysCube(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double radius, const double charge, Creature* owner);
+           const double side_len, const double charge, Creature* owner);
 
   ~PhysCube() override;
 };
@@ -81,12 +82,26 @@ public:
 
 class PhysWall: public PhysObject {
 public:
+  enum class WallType;
+protected:
+  WallType wall_type;
+public:
+  enum class WallType {
+    LEFT,
+    RIGHT,
+    UPPER,
+    LOWER
+  };
+
   Vector2f edge1;
   Vector2f edge2;
 
-  PhysWall(const Vector2f& edge1, const Vector2f& edge2, Creature* owner);
+  PhysWall(const Vector2f& edge1, const Vector2f& edge2, Creature* owner,
+           const WallType wall_type);
 
   ~PhysWall() override;
+
+  WallType GetWallType() const;
 
   void Move(const double) override;
 
