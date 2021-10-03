@@ -20,7 +20,6 @@ void ForcesManager::CoulombsLawBallBall(PhysObject* raw_ball1, PhysObject* raw_b
   if (IsZero(distance))
     return;
   Vector2f coulumbs_force12 = -COULOMBS_LAW_K * ball1->charge * ball2->charge / pow(distance, 3) * r12;
-  // printf("col: %lf, %lf\n", coulumbs_force12.x, coulumbs_force12.y);
   ball1->AddForce(coulumbs_force12);
   ball2->AddForce(-coulumbs_force12);
 }
@@ -32,7 +31,7 @@ void ForcesManager::ResponseAll(CreaturesContainer* creatures_container) {
   ResetAccelerations(creatures_container);
 
   for (size_t i = 0; i < creatures_container->NumOfCreatures(); ++i) {
-    for (size_t j = 0; j < creatures_container->NumOfCreatures(); ++j) {
+    for (size_t j = i + 1; j < creatures_container->NumOfCreatures(); ++j) {
       PhysObject* obj1 = creatures_container->GetPhysComponent(i);
       PhysObject* obj2 = creatures_container->GetPhysComponent(j);
 
