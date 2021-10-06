@@ -16,6 +16,8 @@ void CreaturesManager::SyncRendWithPhys() {
 void CreaturesManager::Render(Graphics* graphics) {
   assert(graphics);
 
+  // printf("n_creatures: %zu\n", creatures_container.NumOfCreatures());
+
   for (size_t i = 0; i < creatures_container.NumOfCreatures(); ++i) {
     creatures_container.GetRendComponent(i)->Render(graphics, coord_sys);
   }
@@ -26,5 +28,6 @@ void CreaturesManager::Tick(const double dt, Graphics* graphics) {
   assert(graphics);
 
   phys_engine.Tick(dt, &creatures_container);
+  SyncRendWithPhys();
   Render(graphics);
 }

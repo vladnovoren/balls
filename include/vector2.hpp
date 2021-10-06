@@ -46,6 +46,17 @@ public:
     (*this) = 2 * (normal * *this) * normal - (*this);
   }
 
+  double Angle() const {
+    return atan2(y, x);
+  }
+
+  void Rotate(const double d_phi) {
+    double length = Length();
+    double angle = Angle() + d_phi;
+    x = cos(angle) * length;
+    y = sin(angle) * length;
+  }
+
   Vector2& operator += (const Vector2& right) {
     x += right.x;
     y += right.y;

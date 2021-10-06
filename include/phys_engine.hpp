@@ -4,11 +4,13 @@
 #include "collisions.hpp"
 #include "creatures_container.hpp"
 #include "forces_manager.hpp"
+#include "chem_manager.hpp"
 
 
 class PhysEngine {
   CollisionManager collision_manager;
   ForcesManager forces_manager;
+  ChemManager chem_manager;
 public:
   void Move(const double dt, CreaturesContainer* creatures_container);
 

@@ -14,34 +14,41 @@ App::App():
   creatures_manager.creatures_container.AddCreature(up_wall);
   creatures_manager.creatures_container.AddCreature(down_wall);
 
-  double delta = 25;
+  double delta = 50;
 
-  for (size_t i = 0; i < 20; ++i) {
-    for (size_t j = 0; j < 20; ++j) {
-      if (i % 2) {
-        Ball* ball = new Ball(1,
-                              Vector2f(50, 50),
-                              Vector2f(0, 0),
-                              Vector2f(15 + i * delta, 15 + j * delta), 5,  1,
-                              ColorRGB(i % 2, j % 2, (i + j + 1) % 2));
-        creatures_manager.creatures_container.AddCreature(ball);
-      } else {
+  for (size_t i = 0; i < 10; ++i) {
+    for (size_t j = 0; j < 10; ++j) {
+      // if (i % 2) {
+      //   Ball* ball = new Ball(1,
+      //                         Vector2f(20, 20),
+      //                         Vector2f(0, 0),
+      //                         Vector2f(15 + i * delta, 15 + j * delta), 5,  1,
+      //                         ColorRGB(1, 0, 0));
+      //   creatures_manager.creatures_container.AddCreature(ball);
+      // }
+      // else {
         Cube* cube = new Cube(1,
-                              Vector2f(50, 50),
+                              Vector2f(20, 20),
                               Vector2f(0, 0),
                               Vector2f(15 + i * delta, 15 + j * delta), 10, 1,
                               ColorRGB(i % 2, j % 2, (i + j + 1) % 2));
         creatures_manager.creatures_container.AddCreature(cube);
-      }
+      // }
     }
   }
 
-  Ball* ball = new Ball(3,
-                        Vector2f(-50, 50),
-                        Vector2f(0, 0),
-                        Vector2f(WINDOW_WIDTH - 15, 15), 5,  0,
-                        ColorRGB(1, 0, 0));
-  creatures_manager.creatures_container.AddCreature(ball);
+  // Ball* ball1 = new Ball(5,
+  //                       Vector2f(50, 0),
+  //                       Vector2f(0, 0),
+  //                       Vector2f(50, 50), 20,  0,
+  //                       ColorRGB(1, 0, 0));
+  // Ball* ball2 = new Ball(5,
+  //                       Vector2f(-50, 0),
+  //                       Vector2f(0, 0),
+  //                       Vector2f(300, 50), 20,  0,
+  //                       ColorRGB(1, 0, 0));
+  // creatures_manager.creatures_container.AddCreature(ball1);
+  // creatures_manager.creatures_container.AddCreature(ball2);
 }
 
 

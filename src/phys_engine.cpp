@@ -14,6 +14,7 @@ void PhysEngine::Tick(const double dt, CreaturesContainer* creatures_container) 
   assert(creatures_container);
 
   Move(dt, creatures_container);
+  chem_manager.ReactAll(creatures_container);
   collision_manager.CollideAll(creatures_container);
   forces_manager.ResponseAll(creatures_container);
 }

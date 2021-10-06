@@ -1,11 +1,14 @@
 #include "creatures.hpp"
 
+
 // Creature
 //==============================================================================
 Creature::Creature(PhysObject* phys_component,
-                   Renderable* rend_component):
+                   Renderable* rend_component,
+                   const ActivityLevel activity_level):
           phys_component(phys_component),
-          rend_component(rend_component) {
+          rend_component(rend_component),
+          activity_level(activity_level) {
 }
 
 
@@ -30,10 +33,11 @@ Renderable* Creature::GetRendComponent() const {
 //==============================================================================
 Ball::Ball(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double radius, const double charge, const ColorRGB& color):
+           const double radius, const double charge, const ColorRGB& color,
+           const ActivityLevel activity_level):
       Creature(new PhysBall(mass, velocity, acceleration, center, radius,
                             charge, this),
-               new RenderableBall(center, radius, color, this)) {
+               new RenderableBall(center, radius, color, this), activity_level) {
 }
 
 
@@ -52,10 +56,11 @@ void Ball::SyncRendWithPhys() {
 //==============================================================================
 Cube::Cube(const double mass, const Vector2f& velocity,
            const Vector2f& acceleration, const Vector2f& center,
-           const double side_len, const double charge, const ColorRGB& color):
+           const double side_len, const double charge, const ColorRGB& color,
+           const ActivityLevel activity_level):
       Creature(new PhysCube(mass, velocity, acceleration, center, side_len,
                             charge, this),
-               new RenderableSquare(center, side_len, color, this)) {
+               new RenderableSquare(center, side_len, color, this), activity_level) {
 }
 
 
@@ -73,9 +78,9 @@ void Cube::SyncRendWithPhys() {
 // Wall
 //==============================================================================
 Wall::Wall(const Vector2f& edge1, const Vector2f& edge2, const ColorRGB& color,
-           const PhysWall::WallType wall_type):
+           const PhysWall::WallType wall_type, const ActivityLevel activity_level):
       Creature(new PhysWall(edge1, edge2, this, wall_type),
-               new RenderableWall(edge1, edge2, color, this)) {
+               new RenderableWall(edge1, edge2, color, this), activity_level) {
 }
 
 

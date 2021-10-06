@@ -44,3 +44,22 @@ Creature* CreaturesContainer::GetCreature(const size_t creature_num) {
 size_t CreaturesContainer::NumOfCreatures() {
   return n_creatures;
 }
+
+
+void CreaturesContainer::Split() {
+  size_t new_i = 0;
+  size_t saved_n_creatures = n_creatures;
+  for (size_t i = 0; i < saved_n_creatures; ++i) {
+    if (creatures[i]->activity_level == Creature::ActivityLevel::NOT_ACTIVE) {
+      delete creatures[i];
+      --n_creatures;
+    } else {
+      if (new_i < i) {
+        creatures[new_i] = creatures[i];
+        phys_components[new_i] = phys_components[i];
+        rend_components[new_i] = rend_components[i];
+      }
+      ++new_i;
+    }
+  }
+}

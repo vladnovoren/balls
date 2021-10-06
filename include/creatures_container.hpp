@@ -24,6 +24,8 @@ public:
 
   Creature* GetCreature(const size_t creature_num);
 
+  void Split();
+
   size_t NumOfCreatures();
 };
 

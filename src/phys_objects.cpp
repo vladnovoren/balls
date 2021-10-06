@@ -34,6 +34,13 @@ void PhysObject::AddDeltaImpulse(const Vector2f& add) {
 }
 
 
+double PhysObject::GetKineticEnergy() const {
+  double velocity_module = velocity.Length();
+  return mass * velocity_module * velocity_module / 2;
+}
+
+
+
 double PhysObject::GetMass() const {
   return mass;
 }

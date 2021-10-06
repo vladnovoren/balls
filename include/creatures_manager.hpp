@@ -15,7 +15,7 @@ public:
   void SyncRendWithPhys();
 
   void Render(Graphics* graphics);
-
+  
   void Tick(const double dt, Graphics* graphics);
 };
 

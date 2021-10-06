@@ -34,6 +34,7 @@ public:
   double GetMass() const;
   Vector2f GetImpulse() const;
   PhysType GetType() const;
+  double GetKineticEnergy() const;
 
   virtual void Move(const double dt) = 0;
 
