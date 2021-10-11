@@ -16,6 +16,8 @@ protected:
 public:
   enum class ActivityLevel {
     NOT_ACTIVE,
+    TO_DELETE,
+    TO_CREATE,
     ACTIVE
   };
 

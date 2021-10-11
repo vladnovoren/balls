@@ -3,7 +3,11 @@
 
 // PhysObject
 //------------------------------------------------------------------------------
-PhysObject::PhysObject(Creature* owner): Component(owner) {
+PhysObject::PhysObject(Creature* owner):
+            Component(owner),
+            velocity(Vector2f(0, 0)),
+            acceleration(Vector2f(0, 0)),
+            mass(0) {
 }
 
 
@@ -38,7 +42,6 @@ double PhysObject::GetKineticEnergy() const {
   double velocity_module = velocity.Length();
   return mass * velocity_module * velocity_module / 2;
 }
-
 
 
 double PhysObject::GetMass() const {

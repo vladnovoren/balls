@@ -7,11 +7,8 @@
 #include "react_funcs.hpp"
 
 
-const double MIN_REACT_ENERGY = 500;
-
-
 class ChemManager {
-  typedef bool (*ReactFunc)(Creature*, Creature*, CreaturesContainer*);
+  typedef bool (*ReactFunc)(PhysObject*, PhysObject*, CreaturesContainer*);
   ReactFunc ReactTable[N_PHYS_OBJECTS][N_PHYS_OBJECTS] = {};
 public:
   ChemManager();

@@ -1,6 +1,14 @@
 #include "collide_funcs.hpp"
 
 
+bool ReadyToCollide(Creature* creature) {
+  assert(creature);
+
+  return creature->activity_level == Creature::ActivityLevel::ACTIVE ||
+         creature->activity_level == Creature::ActivityLevel::TO_DELETE;
+}
+
+
 bool DidCollideBallBall(const PhysBall* first, const PhysBall* second) {
   assert(first);
   assert(second);
@@ -62,8 +70,7 @@ bool CollideBallBall(PhysObject* raw_ball1,
 }
 
 
-bool CollideBallCube(PhysObject* raw_ball,
-                                       PhysObject* raw_cube) {
+bool CollideBallCube(PhysObject* raw_ball, PhysObject* raw_cube) {
   assert(raw_ball);
   assert(raw_cube);
 
@@ -103,7 +110,6 @@ void PushBallFromWall(PhysBall* ball, PhysWall* wall) {
       break;
   }
 }
-
 
 
 bool CollideBallWall(PhysObject* raw_ball,

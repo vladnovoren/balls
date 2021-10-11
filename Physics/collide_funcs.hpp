@@ -4,6 +4,8 @@
 #include "creatures.hpp"
 
 
+bool ReadyToCollide(Creature* creature);
+
 bool DidCollideBallBall(const PhysBall* first, const PhysBall* second);
 
 bool DidCollideBallWall(const PhysBall* ball, const PhysWall* wall);

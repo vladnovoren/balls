@@ -48,6 +48,7 @@ void Ball::SyncRendWithPhys() {
   PhysBall* phys = reinterpret_cast<PhysBall*>(phys_component);
   RenderableBall* rend = reinterpret_cast<RenderableBall*>(rend_component);
   rend->center = phys->center;
+  rend->SetRadius(phys->GetRadius());
 }
 //==============================================================================
 
@@ -71,6 +72,7 @@ void Cube::SyncRendWithPhys() {
   PhysCube* phys = reinterpret_cast<PhysCube*>(phys_component);
   RenderableSquare* rend = reinterpret_cast<RenderableSquare*>(rend_component);
   rend->center = phys->center;
+  rend->SetSideLen(2 * phys->GetRadius());
 }
 //==============================================================================
 

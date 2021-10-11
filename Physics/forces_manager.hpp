@@ -4,7 +4,7 @@
 #include "creatures_container.hpp"
 
 
-const double COULOMBS_LAW_K = 1e5;
+const double COULOMBS_LAW_K = 1e9;
 
 class ForcesManager {
   typedef void (ForcesManager::*ResponseFunc)(PhysObject*, PhysObject*);

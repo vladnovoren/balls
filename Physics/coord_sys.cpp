@@ -9,10 +9,8 @@ Ranges::Ranges(const Vector2f& max, const Vector2f& min):
 }
 
 
-CoordSys::CoordSys(const Vector2f& p_center, const Ranges& ranges,
-                   const double ppu):
-          p_center(p_center), ranges(ranges), ppu(ppu) {
-  p_ranges = Ranges();
+CoordSys::CoordSys(const Vector2f& p_center, const double ppu):
+          p_center(p_center), ppu(ppu) {
 }
 
 

@@ -47,8 +47,8 @@ double RenderableBall::GetRadius() const {
 void RenderableBall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderCircle(coord_sys.RealToPixelPoint(center),
-                         coord_sys.RealToPixelLen(radius),
+  graphics->RenderCircle(Circle(coord_sys.RealToPixelPoint(center),
+                                coord_sys.RealToPixelLen(radius)),
                          color);
 }
 //==============================================================================
@@ -80,10 +80,12 @@ double RenderableSquare::GetSideLen() const {
 void RenderableSquare::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderSquare(coord_sys.RealToPixelPoint(center - Vector2f(side_len / 2,
-                                                                      -side_len / 2)),
-                         coord_sys.RealToPixelLen(side_len),
-                         color);
+  const Vector2f position = coord_sys.RealToPixelPoint(center - Vector2f(side_len / 2,
+                                                       -side_len / 2));
+  const double pixel_len = coord_sys.RealToPixelLen(side_len);
+  const Vector2f size = Vector2f(pixel_len, pixel_len);
+
+  graphics->RenderRect(Rect(position, size), color);
 }
 //==============================================================================
 
@@ -104,8 +106,8 @@ RenderableWall::~RenderableWall() {}
 void RenderableWall::Render(Graphics* graphics, const CoordSys& coord_sys) {
   assert(graphics);
 
-  graphics->RenderLine(coord_sys.RealToPixelPoint(edge1),
-                       coord_sys.RealToPixelPoint(edge2),
+  graphics->RenderLine(Line(coord_sys.RealToPixelPoint(edge1),
+                            coord_sys.RealToPixelPoint(edge2)),
                        color);
 }
 //==============================================================================

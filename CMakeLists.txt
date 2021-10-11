@@ -6,15 +6,16 @@ set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Werror -O2")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(balls src/creatures.cpp src/creatures_container.cpp
-               src/coord_sys.cpp src/collisions.cpp src/color.cpp
-               src/component.cpp src/graphics.cpp src/phys_engine.cpp
-               src/phys_objects.cpp src/renderable.cpp src/app.cpp src/main.cpp
-               src/tools.cpp src/creatures_manager.cpp src/forces_manager.cpp
-               src/chem_manager.cpp src/collide_funcs.cpp src/react_funcs.cpp)
+add_executable(balls Creatures/creatures.cpp Creatures/creatures_container.cpp
+               Physics/coord_sys.cpp Physics/collisions.cpp Graphics/color.cpp
+               Creatures/component.cpp Graphics/graphics.cpp Physics/phys_engine.cpp
+               Creatures/phys_objects.cpp Creatures/renderable.cpp General/app.cpp General/main.cpp
+               Tools/tools.cpp Creatures/creatures_manager.cpp Physics/forces_manager.cpp
+               Physics/chem_manager.cpp Physics/collide_funcs.cpp Physics/react_funcs.cpp
+               Views/view.cpp)
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-include_directories(include/)
+include_directories(Creatures/ Physics/ Graphics/ General/ Tools/ Views/)
 
 target_link_libraries(balls sfml-graphics)

@@ -2,6 +2,7 @@
 #define CREATURES_MANAGER_HPP
 
 #include "phys_engine.hpp"
+#include "creatures_config.hpp"
 
 
 class CreaturesManager {
@@ -16,7 +17,7 @@ public:
 
   void Render(Graphics* graphics);
   
-  void Tick(const double dt, Graphics* graphics);
+  void Tick(const double dt);
 };
 
 

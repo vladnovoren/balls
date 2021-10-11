@@ -1,4 +1,1 @@
-collision manager
-phys engine & objects manager
-DISABLE VIRTUAL INHERITANCE
-place things like mass & velocity in base class PhysObject
+перестроить App под новую иерархию, связанную с Views

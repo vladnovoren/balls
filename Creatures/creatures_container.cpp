@@ -15,6 +15,7 @@ bool CreaturesContainer::AddCreature(Creature* creature) {
   assert(creature);
 
   if (n_creatures == MAX_N_CREATURES) {
+    delete creature;
     return false;
   }
 
@@ -50,10 +51,11 @@ void CreaturesContainer::Split() {
   size_t new_i = 0;
   size_t saved_n_creatures = n_creatures;
   for (size_t i = 0; i < saved_n_creatures; ++i) {
-    if (creatures[i]->activity_level == Creature::ActivityLevel::NOT_ACTIVE) {
+    if (creatures[i]->activity_level == Creature::ActivityLevel::TO_DELETE) {
       delete creatures[i];
       --n_creatures;
     } else {
+      creatures[i]->activity_level = Creature::ActivityLevel::ACTIVE;
       if (new_i < i) {
         creatures[new_i] = creatures[i];
         phys_components[new_i] = phys_components[i];

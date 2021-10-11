@@ -15,19 +15,25 @@ void CollisionManager::CollideAll(CreaturesContainer* creatures_container) {
 
   for (size_t i = 0; i < creatures_container->NumOfCreatures(); ++i) {
     for (size_t j = i + 1; j < creatures_container->NumOfCreatures(); ++j) {
-      PhysObject* phys_obj1 = creatures_container->GetPhysComponent(i);
-      PhysObject* phys_obj2 = creatures_container->GetPhysComponent(j);
+      Creature* creature_i = creatures_container->GetCreature(i);
+      Creature* creature_j = creatures_container->GetCreature(j);
 
-      int type1 = static_cast<int>(phys_obj1->GetType());
-      int type2 = static_cast<int>(phys_obj2->GetType());
+      if (!ReadyToCollide(creature_i) || !ReadyToCollide(creature_j))
+        continue;
 
-      if (type1 > type2) {
-        std::swap(phys_obj1, phys_obj2);
-        std::swap(type1, type2);
+      PhysObject* phys_obj_i = creatures_container->GetPhysComponent(i);
+      PhysObject* phys_obj_j = creatures_container->GetPhysComponent(j);
+
+      int type_i = static_cast<int>(phys_obj_i->GetType());
+      int type_j = static_cast<int>(phys_obj_j->GetType());
+
+      if (type_i > type_j) {
+        std::swap(phys_obj_i, phys_obj_j);
+        std::swap(type_i, type_j);
       }
 
-      if (CollideTable[type1][type2])
-        (CollideTable[type1][type2])(phys_obj1, phys_obj2);
+      if (CollideTable[type_i][type_j])
+        (CollideTable[type_i][type_j])(phys_obj_i, phys_obj_j);
     }
   }
 }
