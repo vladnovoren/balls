@@ -12,8 +12,8 @@ void ForcesManager::CoulombsLawBallBall(PhysObject* raw_ball1, PhysObject* raw_b
   assert(raw_ball1);
   assert(raw_ball2);
 
-  PhysBall* ball1 = reinterpret_cast<PhysBall*>(raw_ball1);
-  PhysBall* ball2 = reinterpret_cast<PhysBall*>(raw_ball2);
+  PhysBall* ball1 = static_cast<PhysBall*>(raw_ball1);
+  PhysBall* ball2 = static_cast<PhysBall*>(raw_ball2);
 
   Vector2f r12 = ball1->center - ball2->center;
   double distance = r12.Length();

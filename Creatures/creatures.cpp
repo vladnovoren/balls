@@ -45,8 +45,8 @@ Ball::~Ball() {}
 
 
 void Ball::SyncRendWithPhys() {
-  PhysBall* phys = reinterpret_cast<PhysBall*>(phys_component);
-  RenderableBall* rend = reinterpret_cast<RenderableBall*>(rend_component);
+  PhysBall* phys = static_cast<PhysBall*>(phys_component);
+  RenderableBall* rend = static_cast<RenderableBall*>(rend_component);
   rend->center = phys->center;
   rend->SetRadius(phys->GetRadius());
 }
@@ -69,8 +69,8 @@ Cube::~Cube() {}
 
 
 void Cube::SyncRendWithPhys() {
-  PhysCube* phys = reinterpret_cast<PhysCube*>(phys_component);
-  RenderableSquare* rend = reinterpret_cast<RenderableSquare*>(rend_component);
+  PhysCube* phys = static_cast<PhysCube*>(phys_component);
+  RenderableSquare* rend = static_cast<RenderableSquare*>(rend_component);
   rend->center = phys->center;
   rend->SetSideLen(2 * phys->GetRadius());
 }
@@ -90,8 +90,8 @@ Wall::~Wall() {}
 
 
 void Wall::SyncRendWithPhys() {
-  PhysWall* phys = reinterpret_cast<PhysWall*>(phys_component);
-  RenderableWall* rend = reinterpret_cast<RenderableWall*>(rend_component);
+  PhysWall* phys = static_cast<PhysWall*>(phys_component);
+  RenderableWall* rend = static_cast<RenderableWall*>(rend_component);
   rend->edge1 = phys->edge1;
   rend->edge2 = phys->edge2;
 }

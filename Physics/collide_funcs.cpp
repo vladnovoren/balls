@@ -42,8 +42,8 @@ bool CollideBallBall(PhysObject* raw_ball1,
   assert(raw_ball1);
   assert(raw_ball2);
 
-  PhysBall* ball1 = reinterpret_cast<PhysBall*>(raw_ball1);
-  PhysBall* ball2 = reinterpret_cast<PhysBall*>(raw_ball2);
+  PhysBall* ball1 = static_cast<PhysBall*>(raw_ball1);
+  PhysBall* ball2 = static_cast<PhysBall*>(raw_ball2);
 
   if (!DidCollideBallBall(ball1, ball2))
     return false;
@@ -77,8 +77,8 @@ bool CollideBallCube(PhysObject* raw_ball, PhysObject* raw_cube) {
   if (!CollideBallBall(raw_ball, raw_cube))
     return false;
 
-  PhysBall* ball = reinterpret_cast<PhysBall*>(raw_ball);
-  PhysBall* cube = reinterpret_cast<PhysBall*>(raw_cube);
+  PhysBall* ball = static_cast<PhysBall*>(raw_ball);
+  PhysBall* cube = static_cast<PhysBall*>(raw_cube);
 
   Renderable* ball_rend = ball->GetOwner()->GetRendComponent();
   Renderable* cube_rend = cube->GetOwner()->GetRendComponent();
@@ -117,8 +117,8 @@ bool CollideBallWall(PhysObject* raw_ball,
   assert(raw_ball);
   assert(raw_wall);
 
-  PhysBall* ball = reinterpret_cast<PhysBall*>(raw_ball);
-  PhysWall* wall = reinterpret_cast<PhysWall*>(raw_wall);
+  PhysBall* ball = static_cast<PhysBall*>(raw_ball);
+  PhysWall* wall = static_cast<PhysWall*>(raw_wall);
 
   Vector2f vel_x = Vector2f(ball->velocity.x, 0);
   Vector2f vel_y = Vector2f(0, ball->velocity.y);
@@ -151,8 +151,8 @@ bool CollideCubeCube(PhysObject* raw_cube1,
   if (!CollideBallBall(raw_cube1, raw_cube2))
     return false;
 
-  PhysCube* cube1 = reinterpret_cast<PhysCube*>(raw_cube1);
-  PhysCube* cube2 = reinterpret_cast<PhysCube*>(raw_cube2);
+  PhysCube* cube1 = static_cast<PhysCube*>(raw_cube1);
+  PhysCube* cube2 = static_cast<PhysCube*>(raw_cube2);
 
   Renderable* cube1_rend = cube1->GetOwner()->GetRendComponent();
   Renderable* cube2_rend = cube2->GetOwner()->GetRendComponent();

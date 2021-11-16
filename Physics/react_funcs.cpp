@@ -21,8 +21,8 @@ void TurnCubesIntoBall(PhysCube* phys_cube1, PhysCube* phys_cube2, CreaturesCont
   assert(phys_cube2);
   assert(creatures_container);
 
-  Cube* cube1 = reinterpret_cast<Cube*>(phys_cube1->GetOwner());
-  Cube* cube2 = reinterpret_cast<Cube*>(phys_cube2->GetOwner());
+  Cube* cube1 = static_cast<Cube*>(phys_cube1->GetOwner());
+  Cube* cube2 = static_cast<Cube*>(phys_cube2->GetOwner());
 
   cube1->activity_level = Creature::ActivityLevel::TO_DELETE;
   cube2->activity_level = Creature::ActivityLevel::TO_DELETE;
@@ -50,7 +50,7 @@ void TurnCubeBallIntoBall(PhysBall* phys_ball, PhysCube* phys_cube, CreaturesCon
   assert(phys_ball);
   assert(creatures_container);
 
-  Cube* cube = reinterpret_cast<Cube*>(phys_cube->GetOwner());
+  Cube* cube = static_cast<Cube*>(phys_cube->GetOwner());
   cube->activity_level = Creature::ActivityLevel::TO_DELETE;
 
   double new_ball_mass = phys_ball->GetMass() + phys_cube->GetMass();
@@ -67,10 +67,10 @@ void TurnBallIntoCubes(PhysBall* phys_ball, CreaturesContainer* creatures_contai
   assert(phys_ball);
   assert(creatures_container);
 
-  Ball* ball = reinterpret_cast<Ball*>(phys_ball->GetOwner());
+  Ball* ball = static_cast<Ball*>(phys_ball->GetOwner());
   ball->activity_level = Creature::ActivityLevel::TO_DELETE;
 
-  RenderableBall* rend_ball = reinterpret_cast<RenderableBall*>(ball->GetRendComponent());
+  RenderableBall* rend_ball = static_cast<RenderableBall*>(ball->GetRendComponent());
 
   size_t n_cubes = phys_ball->GetMass();
   double d_phi = 2.0 * M_PI / n_cubes;
@@ -101,8 +101,8 @@ bool ReactBallBall(PhysObject* raw_ball1, PhysObject* raw_ball2, CreaturesContai
   assert(raw_ball2);
   assert(creatures_manager);
 
-  PhysBall* phys_ball1 = reinterpret_cast<PhysBall*>(raw_ball1);
-  PhysBall* phys_ball2 = reinterpret_cast<PhysBall*>(raw_ball2);
+  PhysBall* phys_ball1 = static_cast<PhysBall*>(raw_ball1);
+  PhysBall* phys_ball2 = static_cast<PhysBall*>(raw_ball2);
 
   if (!DidCollideBallBall(phys_ball1, phys_ball2))
     return false;
@@ -119,8 +119,8 @@ bool ReactBallCube(PhysObject* raw_ball, PhysObject* raw_cube, CreaturesContaine
   assert(raw_cube);
   assert(creatures_manager);
 
-  PhysBall* phys_ball = reinterpret_cast<PhysBall*>(raw_ball);
-  PhysCube* phys_cube = reinterpret_cast<PhysCube*>(raw_cube);
+  PhysBall* phys_ball = static_cast<PhysBall*>(raw_ball);
+  PhysCube* phys_cube = static_cast<PhysCube*>(raw_cube);
 
   if (!DidCollideBallBall(phys_ball, phys_cube))
     return false;
@@ -136,8 +136,8 @@ bool ReactCubeCube(PhysObject* raw_cube1, PhysObject* raw_cube2, CreaturesContai
   assert(raw_cube2);
   assert(creatures_manager);
 
-  PhysCube* phys_cube1 = reinterpret_cast<PhysCube*>(raw_cube1);
-  PhysCube* phys_cube2 = reinterpret_cast<PhysCube*>(raw_cube2);
+  PhysCube* phys_cube1 = static_cast<PhysCube*>(raw_cube1);
+  PhysCube* phys_cube2 = static_cast<PhysCube*>(raw_cube2);
 
   if (!DidCollideBallBall(phys_cube1, phys_cube2))
     return false;
