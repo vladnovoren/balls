@@ -121,7 +121,7 @@ bool ButtonView::IsMouseHitted(const Vector2f& mouse_pos) {
 }
 
 
-void ButtonView::OnMouse(const Vector2f& mouse_pos) {
+void ButtonView::OnMouse(const Vector2f&) {
   delegate->OnClick(type);
 }
 
